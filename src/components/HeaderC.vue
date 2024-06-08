@@ -32,15 +32,14 @@ const logout = async () => {
     authStore.datosUsuario.nombre = "";
     authStore.datosUsuario.foto = null;
     router.push({ name: "login" });
-
   } catch (error) {
     console.log(error);
   }
 };
 
-const pushLogin = () => {
+const pusher = (name: string) => {
   openMenu.value = !openMenu.value;
-  router.push({ name: "login" });
+  router.push({ name });
 };
 </script>
 
@@ -81,7 +80,11 @@ const pushLogin = () => {
             clip-rule="evenodd"
           ></path>
         </svg>
-        <img @click="openMenu = !openMenu" :src="authStore.datosUsuario.foto" v-else />
+        <img
+          @click="openMenu = !openMenu"
+          :src="authStore.datosUsuario.foto"
+          v-else
+        />
       </div>
       <div
         v-if="openMenu"
@@ -90,18 +93,22 @@ const pushLogin = () => {
         <ul>
           <li>
             <button
-              @click="pushLogin"
+              v-if="!authStore.token"
+              @click="pusher('login')"
               class="bg-blue-600 px-2 py-1 rounded-lg my-1 text-white"
             >
               Inicar Sesion
             </button>
           </li>
-          <li>
-            <button class="bg-green-600 px-2 py-1 rounded-lg my-1 text-white">
+          <li v-if="authStore.token">
+            <button
+              @click="pusher('perfil')"
+              class="bg-green-600 px-2 py-1 rounded-lg my-1 text-white"
+            >
               Mi Perfil
             </button>
           </li>
-          <li>
+          <li v-if="authStore.token">
             <button
               @click="logout"
               class="bg-red-600 px-2 py-1 rounded-lg my-1 text-white"

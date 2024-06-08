@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "./style.css";
+import "vue3-toastify/dist/index.css";
 import App from "./App.vue";
 import router from "./routes/routes";
 import { VueCookieNext } from "vue-cookie-next";
@@ -33,9 +34,9 @@ router.beforeEach((to, _from, next) => {
   const roles = authStore.roles;
   const requireRoles = to.meta.requireRoles as string[];
 
-  console.log("Ruta destino:", to.name);
-  console.log("Roles requeridos:", requireRoles);
-  console.log("Roles del usuario:", roles);
+//   console.log("Ruta destino:", to.name);
+//   console.log("Roles requeridos:", requireRoles);
+//   console.log("Roles del usuario:", roles);
 
   // true && true
   if (isAuthenticated && token) {
@@ -45,7 +46,7 @@ router.beforeEach((to, _from, next) => {
       next({ name: "login" });
     }
   } else {
-    console.log("No hay token");
+    // console.log("No hay token");
     if (isAuthenticated) {
       next({ name: "inicio" });
     }
