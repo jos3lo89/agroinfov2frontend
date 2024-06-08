@@ -29,12 +29,9 @@ const login = async () => {
 </script>
 
 <template>
-  <section class="flex flex-col items-center justify-center">
+  <section class="flex flex-col items-center justify-center mb-32">
     <h3 class="my-4 font-bold text-2xl">Iniciar sesión</h3>
-    <form
-      @submit.prevent="login"
-      class="md:max-w-md dark:bg-gray-800 p-4 rounded-lg mb-4"
-    >
+    <form @submit.prevent="login" class="dark:bg-gray-800 p-4 rounded-lg mb-4 md:w-80">
       <div class="mb-5">
         <label
           for="email"

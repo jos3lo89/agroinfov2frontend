@@ -4,6 +4,8 @@ import { RouterView } from "vue-router";
 import MainLayout from "./layout/MainLayout.vue";
 
 import HeaderC from "./components/HeaderC.vue";
+
+import FooterC from "./components/FooterC.vue";
 </script>
 
 <template>
@@ -14,7 +16,9 @@ import HeaderC from "./components/HeaderC.vue";
     <template v-slot:main>
       <RouterView />
     </template>
-    <template v-slot:footer></template>
+    <template v-slot:footer>
+      <FooterC />
+    </template>
   </MainLayout>
 </template>
 

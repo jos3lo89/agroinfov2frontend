@@ -5,7 +5,7 @@ import LoginView from "../views/LoginView.vue";
 import RegistrarView from "../views/RegistrarView.vue";
 import AdminView from "../views/admin/AdminView.vue";
 import AdminAsocView from "../views/admin/AdminAsocView.vue";
-import PerfilUsuarioView from "../views/PerfilUsuarioView.vue";
+import PerfilUsuarioView from "../views/usuario/PerfilUsuarioView.vue";
 import EditarPerfilView from "../views/usuario/EditarPerfilView.vue";
 
 const router = createRouter({
@@ -81,23 +81,24 @@ const router = createRouter({
           "admin_general",
           "publico",
           "admin_asociaciones",
-        //   "visitante",
+          //   "visitante",
         ],
       },
-    },{
-        path: "/editar_perfil",
-        name: "editar_perfil",
-        component: EditarPerfilView,
-        meta: {
-          requireAuth: true,
-          requireRoles: [
-            "admin_general",
-            "publico",
-            "admin_asociaciones",
-            // "visitante",
-          ],
-        },
-    }
+    },
+    {
+      path: "/editar_perfil",
+      name: "editar_perfil",
+      component: EditarPerfilView,
+      meta: {
+        requireAuth: true,
+        requireRoles: [
+          "admin_general",
+          "publico",
+          "admin_asociaciones",
+          // "visitante",
+        ],
+      },
+    },
   ],
 });
 

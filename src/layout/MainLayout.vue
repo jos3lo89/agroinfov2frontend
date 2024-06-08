@@ -4,11 +4,11 @@
   <header>
     <slot name="header"></slot>
   </header>
-  <main class="md:mx-10 shadow-xl mt-4">
+  <main class="md:mx-10 mt-4">
     <slot name="main"></slot>
   </main>
   <footer>
-    <slot name="footer"></slot>
+    <slot name="footer"> </slot>
   </footer>
 </template>
 

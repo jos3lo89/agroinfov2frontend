@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
 import { registrarF } from "../service/auth.service";
 import { registrarI } from "../types/tipos";
+import { toast } from "vue3-toastify";
+
+const confirmPassword = ref("");
+const confirmPasswordError = ref("");
 
 const data = reactive<registrarI>({
   nombre: "",
@@ -14,10 +18,36 @@ const registrar = async () => {
   try {
     const res = await registrarF(data);
     console.log(res);
-  } catch (error) {
+
+    if (res.status == 201) {
+      toast.success("Usuario registrado", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1500,
+      });
+    }
+  } catch (error: any) {
     console.log(error);
+    if (error.response.status == 400) {
+      error.response.data.message.forEach((error: any) => {
+        toast.warning(error, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1500,
+        });
+      });
+    }
   }
 };
+
+watch(
+  [() => data.clave, () => confirmPassword.value],
+  ([newClave, newConfirmPassword]) => {
+    if (newClave !== newConfirmPassword && confirmPassword.value != "") {
+      confirmPasswordError.value = "Las contraseñas no coinciden";
+    } else {
+      confirmPasswordError.value = "";
+    }
+  }
+);
 </script>
 
 <template>
@@ -35,11 +65,11 @@ const registrar = async () => {
             >Nombre</label
           >
           <input
-          v-model="data.nombre"
+            v-model="data.nombre"
             type="text"
             id="first_name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="John"
+            placeholder="Rem"
             required
             autocomplete="off"
           />
@@ -51,11 +81,11 @@ const registrar = async () => {
             >Apellido</label
           >
           <input
-          v-model="data.apellido"
+            v-model="data.apellido"
             type="text"
             id="last_name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Doe"
+            placeholder="Ram"
             required
             autocomplete="off"
           />
@@ -65,14 +95,14 @@ const registrar = async () => {
         <label
           for="email"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Email address</label
+          >Dirección de correo electrónico</label
         >
         <input
-        v-model="data.correo"
+          v-model="data.correo"
           type="email"
           id="email"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="john.doe@company.com"
+          placeholder="rem.ram@juice.com"
           required
         />
       </div>
@@ -80,10 +110,10 @@ const registrar = async () => {
         <label
           for="password"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Password</label
+          >Contraseña</label
         >
         <input
-        v-model="data.clave"
+          v-model="data.clave"
           type="password"
           id="password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -95,15 +125,24 @@ const registrar = async () => {
         <label
           for="confirm_password"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Confirm password</label
+          >Confirmar Contraseña</label
         >
         <input
+          v-model="confirmPassword"
           type="password"
           id="confirm_password"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="•••••••••"
           required
         />
+        <span
+          :class="{
+            'text-red-500': confirmPasswordError,
+            hidden: confirmPasswordError == '',
+          }"
+        >
+          {{ confirmPasswordError }}
+        </span>
       </div>
       <button
         type="submit"

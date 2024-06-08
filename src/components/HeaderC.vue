@@ -31,7 +31,7 @@ const logout = async () => {
     authStore.roles = "visitante";
     authStore.datosUsuario.nombre = "";
     authStore.datosUsuario.foto = null;
-    router.push({ name: "login" });
+    router.push({ name: "inicio" });
   } catch (error) {
     console.log(error);
   }
@@ -106,6 +106,22 @@ const pusher = (name: string) => {
               class="bg-green-600 px-2 py-1 rounded-lg my-1 text-white"
             >
               Mi Perfil
+            </button>
+          </li>
+          <li v-if="authStore.roles == 'admin_general'">
+            <button
+              @click="pusher('admin')"
+              class="bg-sky-600 px-2 py-1 rounded-lg my-1 text-white capitalize"
+            >
+              panel de control
+            </button>
+          </li>
+          <li v-if="authStore.roles == 'admin_asociaciones'">
+            <button
+              @click="pusher('admin_asociaciones')"
+              class="bg-amber-600 px-2 py-1 rounded-lg my-1 text-white capitalize"
+            >
+              panel de control
             </button>
           </li>
           <li v-if="authStore.token">

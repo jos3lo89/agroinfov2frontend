@@ -5,10 +5,10 @@ import {
   setFotoUserF,
   deleteFotoUserF,
   actualizarFotoUserF,
-} from "../service/auth.service";
-import { PerfilI } from "../types/tipos";
+} from "../../service/auth.service";
+import { PerfilI } from "../../types/tipos";
 import { toast } from "vue3-toastify";
-import { useAuthStore } from "../context/auth.store";
+import { useAuthStore } from "../../context/auth.store";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -174,13 +174,13 @@ const eliminarFoto = async () => {
         <p class="text-orange-600">
           Fecha creación:
           <span class="text-black dark:text-white">{{
-            datosUsuario.fecha_creacion
+            new Date(datosUsuario.fecha_creacion).toLocaleString("es-PE")
           }}</span>
         </p>
         <p class="text-orange-600">
           Fecha actualización:
           <span class="text-black dark:text-white">{{
-            datosUsuario.fecha_actualizacion
+            new Date(datosUsuario.fecha_actualizacion).toLocaleString("es-PE")
           }}</span>
         </p>
       </div>
