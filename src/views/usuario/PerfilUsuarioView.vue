@@ -10,12 +10,15 @@ import { PerfilI } from "../../types/tipos";
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "../../context/auth.store";
 import { useRouter } from "vue-router";
+import ModalEliminarAccC from "../../components/usuario/ModalEliminarAccC.vue";
 
 const router = useRouter();
 
 const authStore = useAuthStore();
 
 const datosUsuario = ref({} as PerfilI);
+
+const openMenuOpciones = ref(false);
 
 const fotoUserNoFoto = {
   src: "user.webp",
@@ -140,11 +143,22 @@ const eliminarFoto = async () => {
     }
   }
 };
+
+const openModalEliminarAcc = ref(false);
+
+const showModales = () => {
+  openModalEliminarAcc.value = !openModalEliminarAcc.value;
+  openMenuOpciones.value = !openMenuOpciones.value;
+};
 </script>
 
 <template>
   <section class="flex flex-col md:flex-row justify-around gap-3">
     <div class="bg-gray-100 shadow-lg p-4 rounded-lg dark:bg-gray-800">
+      <!-- <div class="absolute bottom-0 right-0 flex items-center gap-2.5"> -->
+
+      <!-- </div> -->
+
       <div class="text-center mb-3">
         <h3 class="text-2xl">Mis Datos</h3>
       </div>
@@ -184,7 +198,7 @@ const eliminarFoto = async () => {
           }}</span>
         </p>
       </div>
-      <div class="mt-3">
+      <div class="mt-3 relative flex justify-start items-center">
         <button
           @click="router.push({ name: 'editar_perfil' })"
           type="button"
@@ -192,8 +206,39 @@ const eliminarFoto = async () => {
         >
           Editar
         </button>
+        <button
+          @click="openMenuOpciones = !openMenuOpciones"
+          type="button"
+          class="focus:outline-none text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-gray-900"
+        >
+          Opciones
+        </button>
+        <div
+          v-if="openMenuOpciones"
+          class="z-10 absolute left-0 right-0 -top-24 bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
+        >
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >Cambiar contraseña</a
+              >
+            </li>
+            <li>
+              <button
+                @click="showModales"
+                type="button"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Eliminar cuenta
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
     <div class="bg-gray-100 shadow-lg p-4 rounded-lg dark:bg-gray-800">
       <div class="text-center mb-3">
         <h3 class="text-2xl">Mi foto</h3>
@@ -262,6 +307,11 @@ const eliminarFoto = async () => {
       </div>
     </div>
   </section>
+
+  <ModalEliminarAccC
+    :abrir="openModalEliminarAcc"
+    @close="openModalEliminarAcc = !openModalEliminarAcc"
+  />
 </template>
 
 <style scoped></style>

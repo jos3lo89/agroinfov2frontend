@@ -4,6 +4,7 @@ import { PerfilI } from "../../types/tipos";
 import { actualizarDatosUserF, getUsuarioF } from "../../service/auth.service";
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "../../context/auth.store";
+import { RouterLink } from "vue-router";
 
 const authStore = useAuthStore();
 
@@ -55,7 +56,7 @@ const actualizarDatos = async () => {
 
 <template>
   <section class="flex flex-col items-center justify-center">
-    <h3 class="my-4 font-bold text-2xl">Registrar</h3>
+    <h3 class="my-4 font-bold text-2xl">Editar Perfil</h3>
     <form
       @submit.prevent="actualizarDatos"
       class="px-4 md:max-w-md dark:bg-gray-800 p-4 rounded-lg mb-4"
@@ -97,10 +98,19 @@ const actualizarDatos = async () => {
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Registrar
+        Actualizar
       </button>
     </form>
+    <div>
+      <p class="text-lg">
+        Volver a mi
+        <RouterLink class="text-blue-600" :to="{ name: 'perfil' }">
+          perfil</RouterLink
+        >
+      </p>
+    </div>
   </section>
+
 </template>
 
 <style scoped></style>

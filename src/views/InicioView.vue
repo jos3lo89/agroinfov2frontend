@@ -60,7 +60,7 @@ const datosAsocSlider = [
     </a> -->
   </div>
 
-  <div class="flex justify-around mb-16 mt-4">
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mb-16 mt-4 place-items-center px-4">
     <div
       v-for="(item, i) in datosAsocSlider"
       :key="i"

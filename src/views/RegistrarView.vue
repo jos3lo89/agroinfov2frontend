@@ -55,7 +55,7 @@ watch(
     <h3 class="my-4 font-bold text-2xl">Registrar</h3>
     <form
       @submit.prevent="registrar"
-      class="px-4 md:max-w-md dark:bg-gray-800 p-4 rounded-lg mb-4"
+      class="px-4 md:max-w-md dark:bg-gray-800 p-4 rounded-lg mb-4 shadow-lg"
     >
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
