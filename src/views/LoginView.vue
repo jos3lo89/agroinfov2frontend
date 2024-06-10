@@ -31,7 +31,10 @@ const login = async () => {
 <template>
   <section class="flex flex-col items-center justify-center mb-32">
     <h3 class="my-4 font-bold text-2xl">Iniciar sesión</h3>
-    <form @submit.prevent="login" class="dark:bg-gray-800 p-4 rounded-lg mb-4 md:w-80 shadow-lg">
+    <form
+      @submit.prevent="login"
+      class="dark:bg-gray-800 p-4 rounded-lg mb-4 md:w-80 shadow-lg"
+    >
       <div class="mb-5">
         <label
           for="email"

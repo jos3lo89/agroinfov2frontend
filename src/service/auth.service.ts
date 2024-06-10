@@ -1,6 +1,6 @@
 import axiosI from "./axios";
 
-import { loginI, PerfilActualizarI, registrarI } from "../types/tipos";
+import { clavesI, loginI, PerfilActualizarI, registrarI } from "../types/tipos";
 
 // iniciar sesión
 export const loginF = async (data: loginI) => {
@@ -43,4 +43,10 @@ export const actualizarFotoUserF = async (data: FormData) => {
 // actualizar perfil datos
 export const actualizarDatosUserF = async (data: PerfilActualizarI) => {
   return await axiosI.put("/usuario", data);
+};
+
+
+// cambiar contraseña
+export const cambiarClavesF = async (data: clavesI) => {
+  return await axiosI.put("/usuario/clave/actualizar", data);
 };

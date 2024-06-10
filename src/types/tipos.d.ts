@@ -37,3 +37,10 @@ export interface loginI {
     nombre: string
     apellido: string
   }
+
+
+  // actualizar clave
+  export interface clavesI {
+    clave: string
+    nuevaClave: string
+  }

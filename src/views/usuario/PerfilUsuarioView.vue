@@ -10,7 +10,7 @@ import { PerfilI } from "../../types/tipos";
 import { toast } from "vue3-toastify";
 import { useAuthStore } from "../../context/auth.store";
 import { useRouter } from "vue-router";
-import ModalEliminarAccC from "../../components/usuario/ModalEliminarAccC.vue";
+import ModalCambiarClave from "../../components/usuario/ModalCambiarClaveC.vue";
 
 const router = useRouter();
 
@@ -222,7 +222,7 @@ const showModales = () => {
               <a
                 href="#"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Cambiar contraseña</a
+                >Eliminar cuenta</a
               >
             </li>
             <li>
@@ -231,7 +231,7 @@ const showModales = () => {
                 type="button"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               >
-                Eliminar cuenta
+                cambiar contraseña
               </button>
             </li>
           </ul>
@@ -308,7 +308,7 @@ const showModales = () => {
     </div>
   </section>
 
-  <ModalEliminarAccC
+  <ModalCambiarClave
     :abrir="openModalEliminarAcc"
     @close="openModalEliminarAcc = !openModalEliminarAcc"
   />

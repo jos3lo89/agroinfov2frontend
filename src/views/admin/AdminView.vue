@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  admin general
+  admin general total
 </template>
 
 <style scoped>
