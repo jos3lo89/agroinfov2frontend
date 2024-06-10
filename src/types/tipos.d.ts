@@ -44,3 +44,8 @@ export interface loginI {
     clave: string
     nuevaClave: string
   }
+
+  // eliminar usuario
+  export interface eliminarUsuarioI {
+    clave: string
+  }

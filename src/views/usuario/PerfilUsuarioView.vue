@@ -11,6 +11,7 @@ import { toast } from "vue3-toastify";
 import { useAuthStore } from "../../context/auth.store";
 import { useRouter } from "vue-router";
 import ModalCambiarClave from "../../components/usuario/ModalCambiarClaveC.vue";
+import ModalEliminarAcc from "../../components/usuario/ModalEliminarAcc.vue";
 
 const router = useRouter();
 
@@ -145,9 +146,15 @@ const eliminarFoto = async () => {
 };
 
 const openModalEliminarAcc = ref(false);
+const openModalCambiarClave = ref(false);
 
 const showModales = () => {
   openModalEliminarAcc.value = !openModalEliminarAcc.value;
+  openMenuOpciones.value = !openMenuOpciones.value;
+};
+
+const showModalCambiarClave = () => {
+  openModalCambiarClave.value = !openModalCambiarClave.value;
   openMenuOpciones.value = !openMenuOpciones.value;
 };
 </script>
@@ -219,11 +226,13 @@ const showModales = () => {
         >
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
             <li>
-              <a
+              <button
+                @click="showModalCambiarClave"
                 href="#"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Eliminar cuenta</a
               >
+                Eliminar cuenta
+              </button>
             </li>
             <li>
               <button
@@ -311,6 +320,11 @@ const showModales = () => {
   <ModalCambiarClave
     :abrir="openModalEliminarAcc"
     @close="openModalEliminarAcc = !openModalEliminarAcc"
+  />
+
+  <ModalEliminarAcc
+    :abrir2="openModalCambiarClave"
+    @close2="openModalCambiarClave = !openModalCambiarClave"
   />
 </template>
 

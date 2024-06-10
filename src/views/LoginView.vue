@@ -3,6 +3,7 @@ import { reactive } from "vue";
 import { loginF } from "../service/auth.service";
 import { useAuthStore } from "../context/auth.store";
 import { RouterLink, useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
 
 const router = useRouter();
 
@@ -22,8 +23,14 @@ const login = async () => {
     authStore.datosUsuario.nombre = res.data.nombre;
     authStore.datosUsuario.foto = res.data.foto_url;
     router.push({ name: "inicio" });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
+    error.response.data.message.forEach((error: any) => {
+      toast.warning(error, {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1500,
+      });
+    });
   }
 };
 </script>
